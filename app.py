@@ -2,6 +2,7 @@ import streamlit as st
 import requests
 import re
 
+# إعداد المظهر المظلم الاحترافي
 st.set_page_config(page_title="Cyber Ops Platform - Real v1.0", page_icon="🛡️", layout="wide")
 
 st.markdown("<h1 style='text-align: center; color: #10b981;'>🛡️ CYBER OPS REAL PLATFORM</h1>", unsafe_allow_html=True)
@@ -12,7 +13,7 @@ col1, col2 = st.columns([1, 2])
 
 with col1:
     st.subheader("🔑 ربط السيرفر الآمن")
-    # هنا تضع رابط localtunnel
+    # هذه الخانة الحيوية التي كانت ناقصة في موقعك
     server_url = st.text_input("رابط خادم الأدوات (Server URL):", placeholder="مثال: https://xxxx.localtunnel.me")
     api_key = st.text_input("مفتاح الأمان السري (API Key):", type="password", placeholder="ادخل مفتاح التشفير الخاص بك")
 
@@ -36,7 +37,7 @@ with col2:
         else:
             terminal_placeholder.markdown(f"{terminal_style}[+] جاري تشفير الطلب وإرساله إلى خادمك الحقيقي على جوجل...\n</div>", unsafe_allow_html=True)
             
-            # تنظيف الرابط من أي شرطة مائلة زائدة في النهاية
+            # تنظيف الرابط من أي مسافات أو شرطات زائدة
             clean_url = server_url.strip().rstrip('/')
             
             payload = {
@@ -46,7 +47,7 @@ with col2:
             }
             
             try:
-                # إرسال الطلب بشكل حقيقي إلى خادم جوجل عبر مسار /run
+                # إرسال الطلب بشكل حقيقي إلى خادم جوجل
                 response = requests.post(f"{clean_url}/run", json=payload, timeout=120)
                 
                 if response.status_code == 200:
@@ -58,4 +59,4 @@ with col2:
                 else:
                     st.error(f"❌ خطأ من السيرفر الخلفي: {response.text}")
             except Exception as e:
-                st.error(f"⚡ فشل الاتصال بخادمك الحقيقي: {str(e)}\nتأكد من أن السيرفر يعمل في Cloud Shell.")
+                st.error(f"⚡ فشل الاتصال بخادمك الحقيقي: {str(e)}\nتأكد من أن السيرفر يعمل في Cloud Shell والرابط صحيح.")
